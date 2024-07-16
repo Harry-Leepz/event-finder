@@ -4,6 +4,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,17 +17,26 @@ export default function Header() {
   return (
     <header className='flex justify-between items-center border-b border-white/20 h-14 sm:px-9 px-3'>
       <Logo />
-      <nav>
-        <ul className='flex gap-x-6 text-sm'>
+      <nav className='h-full'>
+        <ul className='flex gap-x-6 text-sm h-full'>
           {links.map(({ href, label }) => (
             <li
               key={href}
-              className={clsx(" hover:text-white transition", {
-                "text-white": activePathname === href,
-                "text-white/50": activePathname !== href,
-              })}
+              className={clsx(
+                " hover:text-white flex items-center transition relative",
+                {
+                  "text-white": activePathname === href,
+                  "text-white/50": activePathname !== href,
+                }
+              )}
             >
               <Link href={href}>{label}</Link>
+              {activePathname === href && (
+                <motion.div
+                  layoutId='header-active-link'
+                  className='bg-accent h-1 w-full absolute bottom-0'
+                />
+              )}
             </li>
           ))}
         </ul>
