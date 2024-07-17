@@ -1,4 +1,4 @@
-import EventList from "@/components/events/EventList";
+import EventList from "@/components/events/event-list";
 import MainHeading from "@/components/shared/MainHeading";
 
 import { EventType } from "@/lib/types";
