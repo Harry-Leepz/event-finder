@@ -21,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} bg-gray-950 text-gray-50`}>
+      <body
+        className={`${inter.className} bg-gray-950 text-gray-50 overflow-y-scroll`}
+      >
         <Container>
           <Header />
           {children}
