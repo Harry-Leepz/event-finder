@@ -1,12 +1,12 @@
-import SearchForm from "@/components/search/SearchForm";
 import Link from "next/link";
+
+import SearchForm from "@/components/search/SearchForm";
+import MainHeading from "@/components/shared/MainHeading";
 
 export default function Home() {
   return (
     <main className='flex items-center flex-col pt-36 px-3'>
-      <h1 className='text-3xl lg:text-6xl font-bold tracking-tight'>
-        Discover Amazing Events Nearby
-      </h1>
+      <MainHeading>Discover Amazing Events Nearby</MainHeading>
       <p className='mb-12 mt-7 text-2xl lg:text-3xl opacity-90'>
         Explore a world of{" "}
         <span className='font-bold italic underline text-accent'>
