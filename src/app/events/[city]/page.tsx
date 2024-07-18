@@ -18,7 +18,7 @@ export default async function Events({ params }: EventsProps) {
 
   return (
     <main className='flex flex-col items-center py-24 px-5 min-h-[110vh]'>
-      <MainHeading>
+      <MainHeading className='mb-28'>
         {city === "all" && "All Events"}
         {city !== "all" &&
           `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
