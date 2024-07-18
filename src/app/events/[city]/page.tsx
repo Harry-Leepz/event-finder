@@ -10,11 +10,12 @@ type EventsProps = {
 };
 
 export default async function Events({ params }: EventsProps) {
+  const city = params.city;
+
   const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events`
+    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
   );
   const events: EventType[] = await response.json();
-  const city = params.city;
 
   return (
     <main className='flex flex-col items-center py-24 px-5 min-h-[110vh]'>
