@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* SCROLLBAR STYLING */
 /* Chrome, Edge, and Safari */
@@ -24,4 +24,10 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: #0f1015 rgba(255, 255, 255, 0.1);
+}
+
+/* Hover Effect */
+
+.state-effect {
+  @apply hover:scale-105 active:scale-[1.02] transition focus:scale-105;
 }
