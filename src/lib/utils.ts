@@ -5,3 +5,9 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Sleep for a given number of milliseconds (ms) before resolving the promise
+// This is useful for simulating a delay in a function
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
