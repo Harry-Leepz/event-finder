@@ -1,11 +1,20 @@
-import { EventType } from "@/lib/types";
 import EventCard from "./event-card";
 
+import { EventType } from "@/lib/types";
+import { sleep } from "@/lib/utils";
+
 type EventListProps = {
-  events: EventType[];
+  city: string;
 };
 
-export default function EventList({ events }: EventListProps) {
+export default async function EventList({ city }: EventListProps) {
+  await sleep(3000);
+
+  const response = await fetch(
+    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
+  );
+  const events: EventType[] = await response.json();
+
   return (
     <section className='flex flex-wrap gap-10 justify-center max-w-[1100px] px-[20px]'>
       {events.map((event) => (

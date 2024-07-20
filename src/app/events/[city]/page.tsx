@@ -1,7 +1,8 @@
+import { Suspense } from "react";
+
 import EventList from "@/components/events/event-list";
 import MainHeading from "@/components/shared/MainHeading";
-
-import { EventType } from "@/lib/types";
+import Loading from "./loading";
 
 type EventsProps = {
   params: {
@@ -12,11 +13,6 @@ type EventsProps = {
 export default async function Events({ params }: EventsProps) {
   const city = params.city;
 
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
-  );
-  const events: EventType[] = await response.json();
-
   return (
     <main className='flex flex-col items-center py-24 px-5 min-h-[110vh]'>
       <MainHeading className='mb-28'>
@@ -25,7 +21,9 @@ export default async function Events({ params }: EventsProps) {
           `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
       </MainHeading>
 
-      <EventList events={events} />
+      <Suspense fallback={<Loading />}>
+        <EventList city={city} />
+      </Suspense>
     </main>
   );
 }
