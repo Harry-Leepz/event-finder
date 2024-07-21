@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Metadata } from "next";
 
 import EventList from "@/components/events/event-list";
 import MainHeading from "@/components/shared/MainHeading";
@@ -9,6 +10,14 @@ type EventsProps = {
     city: string;
   };
 };
+
+export function generateMetadata({ params }: EventsProps): Metadata {
+  const city = params.city;
+  return {
+    title: `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`,
+    description: `Explore a world of excitement with events in ${city}`,
+  };
+}
 
 export default async function Events({ params }: EventsProps) {
   const city = params.city;
