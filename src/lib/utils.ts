@@ -11,3 +11,8 @@ export function cn(...inputs: ClassValue[]) {
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+// Capitalize the first letter of a string
+export function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
