@@ -16,8 +16,10 @@ type EventsProps = {
 export function generateMetadata({ params }: EventsProps): Metadata {
   const city = params.city;
   return {
-    title: `Events in ${capitalizeFirstLetter(city)}`,
-    description: `Explore a world of excitement with events in ${city}`,
+    title:
+      city === "all"
+        ? "All Events"
+        : `Events in ${capitalizeFirstLetter(city)}`,
   };
 }
 
