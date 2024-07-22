@@ -1,6 +1,7 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import prisma from "./db";
+import { notFound } from "next/navigation";
 
 // Wrapper around clsx that merges the classes with tailwind-merge
 export function cn(...inputs: ClassValue[]) {
@@ -30,6 +31,7 @@ export async function getEvents(city: string) {
       date: "asc",
     },
   });
+
   return events;
 }
 
@@ -40,5 +42,9 @@ export async function getEvent(slug: string) {
       slug: slug,
     },
   });
+
+  if (!event) {
+    return notFound();
+  }
   return event;
 }
