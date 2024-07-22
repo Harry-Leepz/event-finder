@@ -1,6 +1,6 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventyEvent } from "@prisma/client";
+import prisma from "./db";
 
 // Wrapper around clsx that merges the classes with tailwind-merge
 export function cn(...inputs: ClassValue[]) {
@@ -20,18 +20,22 @@ export function capitalizeFirstLetter(str: string) {
 
 // Fetch events from the API based on the city
 export async function getEvents(city: string) {
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
-  );
-  const events: EventyEvent[] = await response.json();
+  // If the city is "all", we don't filter by city
+  // And we return all events as undefined in returns all events
+  const events = await prisma.eventyEvent.findMany({
+    where: {
+      city: city === "all" ? undefined : capitalizeFirstLetter(city),
+    },
+  });
   return events;
 }
 
 // Fetch a single event from the API based on the slug
 export async function getEvent(slug: string) {
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-  );
-  const event: EventyEvent = await response.json();
+  const event = await prisma.eventyEvent.findUnique({
+    where: {
+      slug: slug,
+    },
+  });
   return event;
 }
