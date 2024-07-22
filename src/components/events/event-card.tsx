@@ -6,10 +6,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { EventType } from "@/lib/types";
+import { EventyEvent } from "@prisma/client";
 
 type EventCardProps = {
-  event: EventType;
+  event: EventyEvent;
 };
 
 const MotionLink = motion(Link);

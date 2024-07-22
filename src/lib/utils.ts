@@ -1,6 +1,6 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventType } from "./types";
+import { EventyEvent } from "@prisma/client";
 
 // Wrapper around clsx that merges the classes with tailwind-merge
 export function cn(...inputs: ClassValue[]) {
@@ -23,7 +23,7 @@ export async function getEvents(city: string) {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
   );
-  const events: EventType[] = await response.json();
+  const events: EventyEvent[] = await response.json();
   return events;
 }
 
@@ -32,6 +32,6 @@ export async function getEvent(slug: string) {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
   );
-  const event: EventType = await response.json();
+  const event: EventyEvent = await response.json();
   return event;
 }
