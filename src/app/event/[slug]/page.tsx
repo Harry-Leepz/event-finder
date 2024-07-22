@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { EventType } from "@/lib/types";
@@ -8,6 +9,20 @@ type EventProps = {
     slug: string;
   };
 };
+
+export async function generateMetadata({
+  params,
+}: EventProps): Promise<Metadata> {
+  const slug = params.slug;
+  const response = await fetch(
+    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
+  );
+  const event: EventType = await response.json();
+
+  return {
+    title: event.name,
+  };
+}
 
 export default async function Event({ params }: EventProps) {
   const eventName = params.slug;
