@@ -21,8 +21,6 @@ export function capitalizeFirstLetter(str: string) {
 
 // Fetch events from the API based on the city
 export async function getEvents(city: string, page = 1) {
-  // If the city is "all", we don't filter by city
-  // And we return all events as undefined in returns all events
   const events = await prisma.eventyEvent.findMany({
     where: {
       city: city === "all" ? undefined : capitalizeFirstLetter(city),
@@ -34,7 +32,13 @@ export async function getEvents(city: string, page = 1) {
     skip: (page - 1) * 6,
   });
 
-  return events;
+  const totalCountOfEvents = await prisma.eventyEvent.count({
+    where: {
+      city: city === "all" ? undefined : capitalizeFirstLetter(city),
+    },
+  });
+
+  return { events, totalCountOfEvents };
 }
 
 // Fetch a single event from the API based on the slug
