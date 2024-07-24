@@ -5,7 +5,7 @@ import EventList from "@/components/events/event-list";
 import MainHeading from "@/components/shared/MainHeading";
 import Loading from "./loading";
 
-import { capitalizeFirstLetter } from "@/lib/utils";
+import { capitalizeFirstLetter, getEvents } from "@/lib/utils";
 
 type EventsProps = {
   params: {
@@ -34,11 +34,15 @@ export default async function Events({
   const city = params.city;
   const page = searchParams.page || 1;
 
+  const { totalCountOfEvents } = await getEvents(city, +page);
   return (
     <main className='flex flex-col items-center py-24 px-5 min-h-[110vh]'>
       <MainHeading className='mb-28'>
+        {totalCountOfEvents === 0 && "No events found"}
         {city === "all" && "All Events"}
-        {city !== "all" && `Events in ${capitalizeFirstLetter(city)}`}
+        {city !== "all" &&
+          totalCountOfEvents !== 0 &&
+          `Events in ${capitalizeFirstLetter(city)}`}
       </MainHeading>
 
       <Suspense key={page + city} fallback={<Loading />}>
