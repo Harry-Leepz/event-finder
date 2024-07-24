@@ -20,7 +20,7 @@ export function capitalizeFirstLetter(str: string) {
 }
 
 // Fetch events from the API based on the city
-export async function getEvents(city: string) {
+export async function getEvents(city: string, page = 1) {
   // If the city is "all", we don't filter by city
   // And we return all events as undefined in returns all events
   const events = await prisma.eventyEvent.findMany({
@@ -30,6 +30,8 @@ export async function getEvents(city: string) {
     orderBy: {
       date: "asc",
     },
+    take: 6,
+    skip: (page - 1) * 6,
   });
 
   return events;
