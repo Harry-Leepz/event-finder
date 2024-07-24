@@ -15,14 +15,22 @@ export default function PaginationControls({
 }: PaginationControlsProps) {
   return (
     <section className='flex w-full justify-between'>
-      <Link className={paginationBtnStyles} href={previousPath}>
-        <ArrowLeftIcon />
-        Previous
-      </Link>
-      <Link className={paginationBtnStyles} href={nextPath}>
-        Next
-        <ArrowRightIcon />
-      </Link>
+      {/* Render empty div if no previouspath to mantain space between styling */}
+      {previousPath ? (
+        <Link className={paginationBtnStyles} href={previousPath}>
+          <ArrowLeftIcon />
+          Previous
+        </Link>
+      ) : (
+        <div />
+      )}
+
+      {nextPath && (
+        <Link className={paginationBtnStyles} href={nextPath}>
+          Next
+          <ArrowRightIcon />
+        </Link>
+      )}
     </section>
   );
 }
