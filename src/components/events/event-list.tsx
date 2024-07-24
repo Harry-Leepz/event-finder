@@ -5,14 +5,14 @@ import EventCard from "./event-card";
 type EventListProps = {
   events: EventyEvent[];
   totalCountOfEvents: number;
-  page: number;
+  page?: number;
   city: string;
 };
 
 export default async function EventList({
   events,
   totalCountOfEvents,
-  page,
+  page = 1,
   city,
 }: EventListProps) {
   const previousPath = page > 1 ? `/events/${city}?page=${page - 1}` : "";
