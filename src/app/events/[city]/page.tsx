@@ -34,7 +34,7 @@ export default async function Events({
   const city = params.city;
   const page = searchParams.page || 1;
 
-  const { totalCountOfEvents } = await getEvents(city, +page);
+  const { totalCountOfEvents, events } = await getEvents(city, +page);
   return (
     <main className='flex flex-col items-center py-24 px-5 min-h-[110vh]'>
       <MainHeading className='mb-28'>
@@ -46,7 +46,12 @@ export default async function Events({
       </MainHeading>
 
       <Suspense key={page + city} fallback={<Loading />}>
-        <EventList city={city} page={+page} />
+        <EventList
+          city={city}
+          page={+page}
+          totalCountOfEvents={totalCountOfEvents}
+          events={events}
+        />
       </Suspense>
     </main>
   );

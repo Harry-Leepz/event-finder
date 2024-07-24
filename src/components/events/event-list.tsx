@@ -1,16 +1,20 @@
+import { EventyEvent } from "@prisma/client";
 import PaginationControls from "../pagination/pagination-controls";
 import EventCard from "./event-card";
 
-import { getEvents } from "@/lib/utils";
-
 type EventListProps = {
-  city: string;
+  events: EventyEvent[];
+  totalCountOfEvents: number;
   page: number;
+  city: string;
 };
 
-export default async function EventList({ city, page }: EventListProps) {
-  const { events, totalCountOfEvents } = await getEvents(city, page);
-
+export default async function EventList({
+  events,
+  totalCountOfEvents,
+  page,
+  city,
+}: EventListProps) {
   const previousPath = page > 1 ? `/events/${city}?page=${page - 1}` : "";
   const nextPath =
     totalCountOfEvents > page * 6 ? `/events/${city}?page=${page + 1}` : "";
