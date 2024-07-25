@@ -6,7 +6,8 @@ import EventList from "@/components/events/event-list";
 import MainHeading from "@/components/shared/MainHeading";
 import Loading from "./loading";
 
-import { capitalizeFirstLetter, getEvents } from "@/lib/utils";
+import { capitalizeFirstLetter } from "@/lib/utils";
+import { getEvents } from "@/lib/server-utils";
 
 type EventsProps = {
   params: {

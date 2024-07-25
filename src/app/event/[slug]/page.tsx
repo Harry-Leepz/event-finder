@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 import MainHeading from "@/components/shared/MainHeading";
-import { getEvent } from "@/lib/utils";
+import { getEvent } from "@/lib/server-utils";
 
 type EventProps = {
   params: {
